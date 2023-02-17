@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Python Flask Upload and display image</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+<p><h1 align="center">PASSPORT OCR </h1></p>
+<div class="container">
+<div class="row">
+    <h2>Select a file to upload</h2>
+    <p>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </p>
+    {% if filename %}
+               <div class="col-lg-4 mb-4">
+                  <div class="card h-100">
+            <img src="{{ url_for('display_image', filename=filename) }}">
+                      <br>
+                      <br>
+
+                      <hr style="width:700px; border: 1px solid red,  margin-left: auto ; margin-right: auto, border-width: 1px, margin-top: 0.5em">
+
+                      <h2><b>Extracted Details</b></h2>
+
+    <div style="width:630px;overflow:auto">
+<pre> {{ result }}</pre>
+</div>
+{% endif %}
+                      <br>
+                      <form method="post" action="/" enctype="multipart/form-data">
+        <dl>
+            <p>
+                <input type="file" name="file" class="form-control" autocomplete="off" required>
+            </p>
+        </dl>
+        <p>
+            <input type="submit" value="Submit" class="btn btn-info">
+        </p>
+    </form>
+</div>
+</div>
+</body>
+</html>
